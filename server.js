@@ -1,12 +1,8 @@
-const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
+const initialPrompt = require('./prompts/initialPrompts');
 
-const PORT = process.env.PORT || 3001;
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+const addEmployee = require('./prompts/addEmployeePrompts')
 
 const db = mysql.createConnection(
   {
@@ -18,14 +14,106 @@ const db = mysql.createConnection(
   console.log(`Connected to the employeeManager_db database.`)
 );
 
-db.query('SELECT * FROM employees', function (err, results) {
-  console.log(results);
-});
+initialPrompt()
+.then(ans => {
+  console.log(ans)
 
-app.use((req, res) => {
-  res.status(404).end();
-});
+  switch (ans.start_menu) {
+    case 'view all roles':
+      allRoles();
+      break;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    case 'view all employees':
+      allEmployees()
+      break;
+
+    case 'view all departments':
+      allDepartments()
+      break;
+    
+    case 'add employee':
+        addOneEmployee()
+        break;
+      
+    case 'add department':
+        addNewDepartment()
+        break;
+
+    case 'add role':
+      addNewRole()
+      break;
+
+      default:
+      break;
+  }
+
 })
+
+
+function allRoles(){
+
+  db.query('SELECT * FROM roles', function (err, results) {
+    console.log(results);
+  });
+}
+
+function allEmployees(){
+
+  db.query('SELECT * FROM employee', function (err, results) {
+    console.log(results);
+  });
+}
+
+function allDepartments(){
+
+  db.query('SELECT * FROM depatment', function (err, results) {
+    console.log(results);
+  });
+}
+
+function addOneEmployee(){
+ addEmployee()
+ .then(ans => {
+  console.log(ans);
+  let {empFirstName, empLastName, empRole, empManager} = ans
+  db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`,[empFirstName, empLastName, empRole, empManager], function(err,result){
+    if(err){
+      console.log(err);
+    }else {
+      console.log(result);
+    }
+  })
+ })
+}
+
+function addNewDepartment(){
+  addDepartment()
+  .then(ans => {
+   console.log(ans);
+   let {departmentName} = ans
+   db.query(`INSERT INTO department (department_name) VALUES (?)`,[departmentName], function(err,result){
+     if(err){
+       console.log(err);
+     }else {
+       console.log(result);
+     }
+   })
+  })
+ }
+
+ function addNewRole(){
+  addOneRole()
+  .then(ans => {
+   console.log(ans);
+   let {newRoleName, newRoleSalery, newRoleDepartment} = ans
+   db.query(`INSERT INTO roles (title, salery, department_id) VALUES (?,?,?)`,[newRoleName, newRoleSalery, newRoleDepartment], function(err,result){
+     if(err){
+       console.log(err);
+     }else {
+       console.log(result);
+     }
+   })
+  })
+ }
+
+//INSERT INTO employee (first_name, last_name, role_id, manager_id)

@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql2 = require('mysql2');
 
+function addEmployee(){
 return inquirer
   .prompt([
 {
@@ -24,7 +25,8 @@ return inquirer
     name: 'empManager',
 },
 ])
-.then()
+}
+
 //insert emp first name, emp last name, salery, manager into table employees
 
-module.exports = newRole;
+module.exports = addEmployee;

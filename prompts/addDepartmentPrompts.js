@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql2 = require('mysql2');
 
+function newDepartment(){
 return inquirer
   .prompt([
 {
@@ -9,7 +10,6 @@ return inquirer
     name: 'departmentName',
 },
 ])
-.then()
-//insert department name into table Departments
+}
 
-module.exports = newRole;
+module.exports = newDepartments;

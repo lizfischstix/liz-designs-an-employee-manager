@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql2 = require('mysql2');
 
+function addRole(){
 return inquirer
   .prompt([
 {
@@ -19,7 +20,7 @@ return inquirer
     name: 'newRoleDepartment',
 },    
 ])
-.then()
+}
 //insert role name, role salery, role department into table roles
 
 module.exports = newRole;

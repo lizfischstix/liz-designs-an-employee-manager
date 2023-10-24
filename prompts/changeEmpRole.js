@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
 const mysql2 = require('mysql2');
 
-return inquirer
+function changeRole(){
+  return inquirer
   .prompt([
 {
     type: 'list',
@@ -15,7 +16,8 @@ return inquirer
     name: 'empNewRole',
 },  
 ])
-.then()
+}
+
 //put updated info in Table employees
 
 module.exports = empNewRole;
