@@ -25,24 +25,29 @@ initialPrompt()
         break;
 
       case 'view all employees':
-        allEmployees()
+        allEmployees();
         break;
 
       case 'view all departments':
-        allDepartments()
+        allDepartments();
         break;
 
       case 'add employee':
-        addOneEmployee()
+        addOneEmployee();
         break;
 
       case 'add department':
-        addDepartment()
+        addDepartment();
         break;
 
       case 'add role':
         addNewRole()
         break;
+      
+      case 'quit':
+        console.log('Exiting the application...');
+        process.exit(0);
+       break;
 
       default:
         break;
@@ -54,21 +59,24 @@ initialPrompt()
 function allRoles() {
 
   db.query('SELECT * FROM roles', function (err, results) {
-    console.log(results);
+    console.table(results);
+    initialPrompt();
   });
 }
 
 function allEmployees() {
 
   db.query('SELECT * FROM employee', function (err, results) {
-    console.log(results);
+    console.table(results);
+    initialPrompt();
   });
 }
 
 function allDepartments() {
 
   db.query('SELECT * FROM department', function (err, results) {
-    console.log(results);
+    console.table(results);
+    initialPrompt();
   });
 }
 
