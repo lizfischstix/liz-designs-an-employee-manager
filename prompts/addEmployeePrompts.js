@@ -16,12 +16,12 @@ return inquirer
 },
 {
         type: 'text',
-        message: 'enter employees role',
+        message: 'enter employees role id',
         name: 'empRole',
 },    
 {
     type: 'text',
-    message: 'enter employees manager',
+    message: 'enter employees manager id',
     name: 'empManager',
 },
 ])

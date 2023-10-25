@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const mysql2 = require('mysql2');
 
 function newDepartment(){
-return inquirer
+  return inquirer
   .prompt([
 {
     type: 'text',
@@ -12,4 +12,6 @@ return inquirer
 ])
 }
 
-module.exports = newDepartments;
+
+
+module.exports = addDepartmentPrompts;

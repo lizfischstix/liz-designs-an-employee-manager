@@ -23,4 +23,4 @@ return inquirer
 }
 //insert role name, role salery, role department into table roles
 
-module.exports = newRole;
+module.exports = addRole;

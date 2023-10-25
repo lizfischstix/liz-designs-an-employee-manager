@@ -17,5 +17,5 @@ INSERT INTO department (department_name);
 INSERT INTO roles (title, salary, department_id);
 
 //update employee role
-UPDATE employee SET roleID to newRoleID Where employeeID
+UPDATE employee SET roleID to ? Where employeeID
 

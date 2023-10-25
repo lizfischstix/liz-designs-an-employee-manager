@@ -1,8 +1,9 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const initialPrompt = require('./prompts/initialPrompts');
-
-const addEmployee = require('./prompts/addEmployeePrompts')
+const addEmployee = require('./prompts/addEmployeePrompts');
+// const NewDepartment = require('./prompts/addDepartmentPrompts');
+const addOneRole = require('./prompts/addRolePrompts');
 
 const db = mysql.createConnection(
   {
@@ -15,105 +16,105 @@ const db = mysql.createConnection(
 );
 
 initialPrompt()
-.then(ans => {
-  console.log(ans)
+  .then(ans => {
+    console.log(ans)
 
-  switch (ans.start_menu) {
-    case 'view all roles':
-      allRoles();
-      break;
+    switch (ans.start_menu) {
+      case 'view all roles':
+        allRoles();
+        break;
 
-    case 'view all employees':
-      allEmployees()
-      break;
+      case 'view all employees':
+        allEmployees()
+        break;
 
-    case 'view all departments':
-      allDepartments()
-      break;
-    
-    case 'add employee':
+      case 'view all departments':
+        allDepartments()
+        break;
+
+      case 'add employee':
         addOneEmployee()
         break;
-      
-    case 'add department':
-        addNewDepartment()
+
+      case 'add department':
+        addDepartment()
         break;
 
-    case 'add role':
-      addNewRole()
-      break;
+      case 'add role':
+        addNewRole()
+        break;
 
       default:
-      break;
-  }
+        break;
+    }
 
-})
+  })
 
 
-function allRoles(){
+function allRoles() {
 
   db.query('SELECT * FROM roles', function (err, results) {
     console.log(results);
   });
 }
 
-function allEmployees(){
+function allEmployees() {
 
   db.query('SELECT * FROM employee', function (err, results) {
     console.log(results);
   });
 }
 
-function allDepartments(){
+function allDepartments() {
 
-  db.query('SELECT * FROM depatment', function (err, results) {
+  db.query('SELECT * FROM department', function (err, results) {
     console.log(results);
   });
 }
 
-function addOneEmployee(){
- addEmployee()
- .then(ans => {
-  console.log(ans);
-  let {empFirstName, empLastName, empRole, empManager} = ans
-  db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`,[empFirstName, empLastName, empRole, empManager], function(err,result){
-    if(err){
-      console.log(err);
-    }else {
-      console.log(result);
-    }
-  })
- })
+function addOneEmployee() {
+  addEmployee()
+    .then(ans => {
+      console.log(ans);
+      let { empFirstName, empLastName, empRole, empManager } = ans
+      db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`, [empFirstName, empLastName, empRole, empManager], function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
+      })
+    })
 }
 
-function addNewDepartment(){
+function addNewDepartment() {
   addDepartment()
-  .then(ans => {
-   console.log(ans);
-   let {departmentName} = ans
-   db.query(`INSERT INTO department (department_name) VALUES (?)`,[departmentName], function(err,result){
-     if(err){
-       console.log(err);
-     }else {
-       console.log(result);
-     }
-   })
-  })
- }
+    .then(ans => {
+      console.log(ans);
+      let { departmentName } = ans
+      db.query(`INSERT INTO department (department_name) VALUES (?)`, [departmentName], function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
+      })
+    })
+}
 
- function addNewRole(){
+function addNewRole() {
   addOneRole()
-  .then(ans => {
-   console.log(ans);
-   let {newRoleName, newRoleSalery, newRoleDepartment} = ans
-   db.query(`INSERT INTO roles (title, salery, department_id) VALUES (?,?,?)`,[newRoleName, newRoleSalery, newRoleDepartment], function(err,result){
-     if(err){
-       console.log(err);
-     }else {
-       console.log(result);
-     }
-   })
-  })
- }
+    .then(ans => {
+      console.log(ans);
+      let { newRoleName, newRoleSalery, newRoleDepartment } = ans
+      db.query(`INSERT INTO roles (title, salery, department_id) VALUES (?,?,?)`, [newRoleName, newRoleSalery, newRoleDepartment], function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
+      })
+    })
+}
 
 //INSERT INTO employee (first_name, last_name, role_id, manager_id)
