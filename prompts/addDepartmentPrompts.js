@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
 const mysql2 = require('mysql2');
 
-function newDepartment(){
+function addDepartment(){
   return inquirer
-  .prompt([
+    .prompt([
 {
     type: 'text',
     message: 'enter department name',
@@ -14,4 +14,4 @@ function newDepartment(){
 
 
 
-module.exports = addDepartmentPrompts;
+module.exports = addDepartment;

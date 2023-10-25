@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const initialPrompt = require('./prompts/initialPrompts');
 const addEmployee = require('./prompts/addEmployeePrompts');
-// const NewDepartment = require('./prompts/addDepartmentPrompts');
+const addDepartment = require('./prompts/addDepartmentPrompts');
 const addOneRole = require('./prompts/addRolePrompts');
 
 const db = mysql.createConnection(
@@ -55,7 +55,6 @@ initialPrompt()
 
   })
 
-
 function allRoles() {
 
   db.query('SELECT * FROM roles', function (err, results) {
@@ -88,8 +87,10 @@ function addOneEmployee() {
       db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`, [empFirstName, empLastName, empRole, empManager], function (err, result) {
         if (err) {
           console.log(err);
+          initialPrompt();
         } else {
           console.log(result);
+          initialPrompt();
         }
       })
     })
@@ -103,8 +104,10 @@ function addNewDepartment() {
       db.query(`INSERT INTO department (department_name) VALUES (?)`, [departmentName], function (err, result) {
         if (err) {
           console.log(err);
+          initialPrompt();
         } else {
           console.log(result);
+          initialPrompt();
         }
       })
     })
@@ -118,8 +121,10 @@ function addNewRole() {
       db.query(`INSERT INTO roles (title, salery, department_id) VALUES (?,?,?)`, [newRoleName, newRoleSalery, newRoleDepartment], function (err, result) {
         if (err) {
           console.log(err);
+          initialPrompt();
         } else {
           console.log(result);
+          initialPrompt();
         }
       })
     })
