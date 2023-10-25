@@ -11,6 +11,8 @@
 
   ## Installation: 
   The user starts by opening the provided database, then opening another terminal through server.js where they start node.  From here, users are prompted to select what they would like to see/do in the app.
+
+  View a demo video of the app [HERE](https://watch.screencastify.com/v/by8AbgpYJuh3LgBMD8Dr).
   
   ## Contact:
   @lizfischstix
