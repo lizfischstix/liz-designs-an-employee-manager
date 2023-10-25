@@ -5,8 +5,6 @@
   ## Table of Contents: 
   * [installation](#installation)
   * [credits](#credits)
-  * [features](#features)
-  * [tests](#tests)
   * [License](#license)
 
   ## Installation: 
